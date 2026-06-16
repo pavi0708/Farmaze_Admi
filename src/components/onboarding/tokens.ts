@@ -1,0 +1,17 @@
+export const T = {
+  cream: "hsl(37 47% 96%)",
+  paper: "hsl(36 40% 92%)",
+  surface: "hsl(37 47% 99%)",
+  ink: "hsl(20 45% 16%)",
+  inkSoft: "hsl(20 35% 28%)",
+  muted: "hsl(29 15% 48%)",
+  line: "hsl(30 23% 88%)",
+  lineSoft: "hsl(30 23% 92%)",
+  amber: "hsl(33 65% 46%)",
+  amberDk: "hsl(33 65% 35%)",
+  amberLt: "hsl(33 65% 90%)",
+  amberBg: "hsl(33 65% 96%)",
+  leaf: "hsl(145 40% 32%)",
+  leafLt: "hsl(145 40% 92%)",
+  navy: "hsl(200 58% 16%)",
+} as const;

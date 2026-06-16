@@ -1,0 +1,35 @@
+name: AI Code Review
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    name: PR-Agent Review
+    permissions:
+      issues: write
+      pull-requests: write
+      contents: read
+    steps:
+      - uses: Codium-ai/pr-agent@main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OPENAI_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENAI.API_TYPE: "anthropic"
+          OPENAI.DEPLOYMENT_ID: "claude-sonnet-4-6"
+          PR_REVIEWER.EXTRA_INSTRUCTIONS: |
+            Review this React/TypeScript frontend code against these standards:
+            - TypeScript strict mode, no `any` types
+            - Use descriptive variable names
+            - Prefer early returns over deep nesting
+            - Pages contain ZERO logic — only compose features
+            - Hooks live with their feature, each in a separate file
+            - No barrel index.ts files — import directly from the file
+            - Use shadcn-ui + Tailwind for styling
+            - Check for XSS in any user-rendered content
+            - Verify auth context is used (no hardcoded client_id)
+          PR_DESCRIPTION.ENABLE: true
+          PR_REVIEWER.ENABLE: true
+          PR_CODE_SUGGESTIONS.ENABLE: true
